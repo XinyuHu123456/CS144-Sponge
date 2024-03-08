@@ -2,6 +2,8 @@
 #define SPONGE_LIBSPONGE_BYTE_STREAM_HH
 
 #include <string>
+#include <vector>
+
 
 //! \brief An in-order byte stream.
 
@@ -11,12 +13,22 @@
 class ByteStream {
   private:
     // Your code here -- add private members as necessary.
+    //定义缓冲区
+    std::vector<char> buffer;
+    //定义读，写指针
+    unsigned int nread{};
+    unsigned int nwrite{};
+    unsigned int total_read{};
+    unsigned int total_write{};
+    unsigned int _capacity;
+
+
 
     // Hint: This doesn't need to be a sophisticated data structure at
     // all, but if any of your tests are taking longer than a second,
     // that's a sign that you probably want to keep exploring
     // different approaches.
-
+    bool _input_end{false};
     bool _error{};  //!< Flag indicating that the stream suffered an error.
 
   public:
