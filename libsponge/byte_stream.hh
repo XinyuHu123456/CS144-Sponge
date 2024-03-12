@@ -14,12 +14,12 @@ class ByteStream {
   private:
     // Your code here -- add private members as necessary.
     //定义缓冲区
-    vector<char> buffer;
+    std::vector<char> buffer;
     //定义读，写指针
     unsigned int nread{};
     unsigned int nwrite{};
-    unsigned int total_read{};
-    unsigned int total_write{};
+    unsigned int total_read{0};
+    unsigned int total_write{0};
     unsigned int _capacity;
 
 

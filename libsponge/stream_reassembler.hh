@@ -5,7 +5,7 @@
 
 #include <cstdint>
 #include <string>
-
+/*
 class Node {
   private:
     uint32_t dataIndex;
@@ -15,6 +15,7 @@ class Node {
   public:
     Node(const uint32_t &dataIndex, const uint32_t &length);
 };
+*/
 
 //! \brief A class that assembles a series of excerpts from a byte stream (possibly out of order,
 //! possibly overlapping) into an in-order byte stream.

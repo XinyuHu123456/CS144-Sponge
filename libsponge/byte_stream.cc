@@ -74,7 +74,7 @@ size_t ByteStream::buffer_size() const { return total_write - total_read; }
 
 bool ByteStream::buffer_empty() const { return nwrite == nread; }
 
-bool ByteStream::eof() const { return _input_end == true && nread == nwrite ? true : false; }
+bool ByteStream::eof() const { return _input_end == true && nread == nwrite;}
 
 // 到lab1你就会知道为什么这里要这么两个个方法，也就是为什么buffer类中需要这两个字段，
 // 这两个字段是与Reassembler和滑动窗口相关的
