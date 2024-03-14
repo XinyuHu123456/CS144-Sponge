@@ -5,13 +5,32 @@
 
 #include <cstdint>
 #include <string>
+/*
+class Node {
+  private:
+    uint32_t dataIndex;
+    uint32_t length;
+    std::string content;
+    Node* next;
+  public:
+    Node(const uint32_t &dataIndex, const uint32_t &length);
+};
+*/
 
 //! \brief A class that assembles a series of excerpts from a byte stream (possibly out of order,
 //! possibly overlapping) into an in-order byte stream.
 class StreamReassembler {
   private:
     // Your code here -- add private members as necessary.
-
+    // 表明滑动窗口里面第一个数据包是否已经到达
+    bool first_in{false};
+    // 标志是否收到最后一个数据包
+    bool _eof{false};
+    // 最后一个数据包的最后一个序列号
+    size_t _eof_index{0};
+    //这个是重组器的buffer，对于不按序到达的数据存储在这里(其实就是滑动窗口)
+    std::vector<std::pair<char, bool>> buffer;
+    size_t _unassembled_bytes = 0;
     ByteStream _output;  //!< The reassembled in-order byte stream
     size_t _capacity;    //!< The maximum number of bytes
 
@@ -31,8 +50,11 @@ class StreamReassembler {
     //! \param eof the last byte of `data` will be the last byte in the entire stream
     void push_substring(const std::string &data, const uint64_t index, const bool eof);
 
-    //! \name Access the reassembled byte stream
-    //!@{
+
+    size_t first_unread();
+    size_t first_unassembled();
+    size_t first_unacceptable();
+
     const ByteStream &stream_out() const { return _output; }
     ByteStream &stream_out() { return _output; }
     //!@}
